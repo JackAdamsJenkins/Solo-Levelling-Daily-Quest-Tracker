@@ -1,0 +1,267 @@
+:root {
+    --color-bg: #0a0a1a;
+    --color-primary: #00aaff;
+    --color-secondary: #9d00ff;
+    --color-complete: #ffcc00;
+    --color-green: #00ff6a;
+    --color-text: #e0e0e0;
+    --color-border: rgba(0, 170, 255, 0.3);
+    --color-border-focus: rgba(0, 170, 255, 0.8);
+}
+
+body {
+    background-color: var(--color-bg);
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--color-text);
+    overflow-y: scroll;
+    margin: 0;
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    background-image: 
+        linear-gradient(rgba(0, 170, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 170, 255, 0.05) 1px, transparent 1px);
+    background-size: 25px 25px;
+    animation: background-pan 40s linear infinite;
+}
+
+@keyframes background-pan {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: -500px -500px;
+    }
+}
+
+.system-window {
+    background-color: rgba(10, 10, 26, 0.85);
+    border: 1px solid var(--color-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(0, 170, 255, 0.25);
+    border-radius: 12px;
+}
+
+.glow-text {
+    color: var(--color-primary);
+    text-shadow: 0 0 5px var(--color-primary), 0 0 10px var(--color-primary);
+}
+
+.glow-text-complete {
+    color: var(--color-complete);
+    text-shadow: 0 0 5px var(--color-complete), 0 0 10px var(--color-complete);
+}
+
+.progress-bar-container {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--color-border);
+    border-radius: 9999px;
+    overflow: hidden;
+    height: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: black;
+    background: linear-gradient(90deg, var(--color-secondary), var(--color-primary));
+    transition: width 0.5s ease-in-out;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+}
+
+.progress-bar-fill-completed {
+    background: linear-gradient(90deg, #e6a800, var(--color-complete));
+}
+
+.btn-primary {
+    background-color: rgba(0, 170, 255, 0.1);
+    border: 1px solid var(--color-border);
+    color: var(--color-primary);
+    transition: all 0.2s ease-in-out;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: rgba(0, 170, 255, 0.2);
+    box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+}
+
+.btn-primary:disabled {
+    background-color: rgba(128, 128, 128, 0.1);
+    border-color: rgba(128, 128, 128, 0.3);
+    color: #888;
+    cursor: not-allowed;
+    text-shadow: none;
+    box-shadow: none;
+}
+
+.btn-action {
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    transition: all 0.2s ease-in-out;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+}
+
+.btn-action:hover:not(:disabled) {
+    background-color: rgba(0, 170, 255, 0.1);
+    color: var(--color-primary);
+    border-color: var(--color-border-focus);
+}
+
+.btn-action:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.quest-item-completed {
+    border-color: var(--color-complete) !important;
+    background-color: rgba(255, 204, 0, 0.05);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    animation: slideIn 0.3s ease-in-out;
+}
+
+@keyframes slideIn {
+    from { 
+        opacity: 0;
+        transform: translateY(-20px); 
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid var(--color-border);
+    padding: 8px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: rgba(0, 170, 255, 0.1);
+    color: var(--color-primary);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    justify-items: center;
+}
+
+.calendar-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+    font-size: 0.875rem;
+}
+
+.calendar-weekday {
+    font-weight: bold;
+    color: var(--color-primary);
+    height: auto;
+}
+
+.calendar-day-completed {
+    background-color: var(--color-complete);
+    color: var(--color-bg);
+    font-weight: bold;
+    box-shadow: 0 0 8px var(--color-complete);
+}
+
+.calendar-day-today {
+    border: 1px solid var(--color-primary);
+}
+
+.quest-log-container {
+    animation: quest-log-fade-in 0.7s ease-in-out forwards;
+}
+
+@keyframes quest-log-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn-primary.btn-complete-pulse {
+    background: linear-gradient(90deg, var(--color-secondary), var(--color-primary));
+    color: var(--color-text);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    animation: pulse 2s infinite;
+    border-color: var(--color-primary);
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(0, 170, 255, 0.7);
+    }
+    70% {
+        transform: scale(1.02);
+        box-shadow: 0 0 10px 15px rgba(0, 170, 255, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(0, 170, 255, 0);
+    }
+}
+
+.active-difficulty {
+    background-color: rgba(0, 170, 255, 0.2) !important;
+    color: var(--color-primary) !important;
+    border-color: var(--color-border-focus) !important;
+    box-shadow: 0 0 8px rgba(0, 170, 255, 0.4);
+}
