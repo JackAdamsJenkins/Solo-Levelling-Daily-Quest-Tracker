@@ -1,14 +1,14 @@
-import { useState, useEffect, useReducer } from 'react';
-import { questReducer, initialState } from './state/quest_reducer';
-import { getTodayDateString } from './utils/date_helpers';
+import { CalendarDays, CheckCircle2 } from 'lucide-react';
+import { useEffect, useReducer, useState } from 'react';
+import DifficultySelector from './components/DifficultySelector';
+import HistoryModal from './components/HistoryModal';
+import Modal from './components/Modal';
 import QuestLog from './components/QuestLog';
 import StreakCounter from './components/StreakCounter';
-import Modal from './components/Modal';
-import HistoryModal from './components/HistoryModal';
-import DifficultySelector from './components/DifficultySelector';
-import { CalendarDays, CheckCircle2 } from 'lucide-react';
-import { WARMUP_ROUTINE, COOLDOWN_ROUTINE } from './data/routines';
 import { QuestDispatchContext } from './context/QuestContext';
+import { COOLDOWN_ROUTINE, WARMUP_ROUTINE } from './data/routines';
+import { initialState, questReducer } from './state/quest_reducer';
+import { getTodayDateString } from './utils/date_helpers';
 
 function App() {
     const [state, dispatch] = useReducer(questReducer, initialState);
@@ -56,9 +56,11 @@ function App() {
             <div className="system-window w-full max-w-2xl p-6 space-y-4">
                 <header className="flex justify-between items-center pb-4 border-b border-[var(--color-border)]">
                     <h1 className="text-2xl sm:text-3xl glow-text">[Daily Quest]</h1>
-                    <div className="flex items-center space-x-2 sm:space-x-4">
-                        <StreakCounter streak={state.streak} />
-                        <button onClick={() => setHistoryOpen(true)} className="btn-action p-2 rounded-full flex items-center justify-center" aria-label="View completion history">
+                    <div className="flex flex-row items-center gap-2 sm:gap-4 w-full max-w-xs">
+                        <div className="flex flex-row items-center gap-2 flex-shrink-0">
+                            <StreakCounter streak={state.streak} />
+                        </div>
+                        <button onClick={() => setHistoryOpen(true)} className="btn-action p-2 rounded-full flex items-center justify-center flex-shrink-0" aria-label="View completion history">
                             <CalendarDays size={20} />
                         </button>
                     </div>
@@ -71,16 +73,18 @@ function App() {
                     </div>
 
                     {canComplete && (
-                         <div className="flex justify-center pt-4">
-                            <button onClick={handleCompleteQuest} className="btn-primary btn-complete-pulse flex items-center space-x-2 text-lg px-6 py-3">
-                                <CheckCircle2 size={24} />
-                                <span>Complete Quest</span>
-                            </button>
+                        <div className="flex justify-center pt-4">
+                            <div className="flex flex-row items-center gap-4 w-full max-w-xs">
+                                <button onClick={handleCompleteQuest} className="btn-primary btn-complete-pulse flex items-center space-x-2 text-lg px-6 py-3 w-full">
+                                    <CheckCircle2 size={24} />
+                                    <span>Complete Quest</span>
+                                </button>
+                            </div>
                         </div>
                     )}
                 </main>
 
-                <footer className="text-center text-purple-400 text-sm pt-4 border-t border-[var(--color-border)]">
+                <footer className="text-center text-sm pt-4 border-t border-[var(--color-border)]">
                     <p>※ Warning: Failure to complete the Daily Quest will result in a penalty.</p>
                 </footer>
 
@@ -99,10 +103,10 @@ function App() {
                 </Modal>
 
                 <Modal isOpen={isCooldownOpen} onClose={() => setCooldownOpen(false)} title="Quest Complete! Cool-down">
-                     <table>
+                    <table>
                         <thead><tr><th>Exercise (Static)</th><th>Hold Duration</th></tr></thead>
                         <tbody>
-                             {COOLDOWN_ROUTINE.map(item => (
+                            {COOLDOWN_ROUTINE.map(item => (
                                 <tr key={item.exercise}>
                                     <td>{item.exercise}</td>
                                     <td>{item.duration}</td>

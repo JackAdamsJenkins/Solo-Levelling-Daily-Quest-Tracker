@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { getIsoDateString } from '../utils/date_helpers';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState } from 'react';
+import { getIsoDateString } from '../utils/date_helpers';
 
 function HistoryCalendar({ history }) {
     const [date, setDate] = useState(new Date());
@@ -19,7 +19,7 @@ function HistoryCalendar({ history }) {
 
     const firstDayOfMonth = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-    
+
     const blanks = Array(firstDayOfMonth).fill(null);
     const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
 
@@ -28,10 +28,10 @@ function HistoryCalendar({ history }) {
 
     return (
         <div className="space-y-4">
-            <div className="flex justify-between items-center">
-                <button onClick={() => changeMonth(-1)} className="btn-action p-2 rounded-full"><ChevronLeft /></button>
+            <div className="flex flex-row justify-between items-center gap-2">
+                <button onClick={() => changeMonth(-1)} className="btn-action p-2 rounded-full flex items-center justify-center"><ChevronLeft /></button>
                 <div className="text-xl glow-text">{monthName} {year}</div>
-                <button onClick={() => changeMonth(1)} className="btn-action p-2 rounded-full"><ChevronRight /></button>
+                <button onClick={() => changeMonth(1)} className="btn-action p-2 rounded-full flex items-center justify-center"><ChevronRight /></button>
             </div>
             <div className="calendar-grid">
                 {weekDays.map(day => <div key={day} className="calendar-cell calendar-weekday">{day}</div>)}
@@ -41,8 +41,8 @@ function HistoryCalendar({ history }) {
                     const isCompleted = history.includes(dayString);
                     const isToday = dayString === todayString;
                     let cellClass = "calendar-cell";
-                    if(isCompleted) cellClass += " calendar-day-completed";
-                    if(isToday && !isCompleted) cellClass += " calendar-day-today";
+                    if (isCompleted) cellClass += " calendar-day-completed";
+                    if (isToday && !isCompleted) cellClass += " calendar-day-today";
 
                     return <div key={day} className={cellClass}>{day}</div>;
                 })}

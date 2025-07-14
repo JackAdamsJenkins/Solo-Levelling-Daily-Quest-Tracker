@@ -1,12 +1,11 @@
-import React from 'react';
 import { Flame } from 'lucide-react';
 
 function StreakCounter({ streak }) {
     return (
-        <div className="flex items-center space-x-2 text-lg">
-            <Flame className="text-yellow-400" />
+        <div className="flex flex-row items-center gap-1 text-lg whitespace-nowrap">
+            <Flame className="text-[var(--color-complete)]" />
             <span className="font-bold glow-text-complete">{streak}</span>
-            <span>Day Streak</span>
+            <span className="text-[var(--color-text)]">Day Streak</span>
         </div>
     );
 }

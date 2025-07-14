@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useContext } from 'react';
-import { RotateCcw, CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, RotateCcw } from 'lucide-react';
+import { useContext, useEffect, useRef } from 'react';
 import { QuestDispatchContext } from '../context/QuestContext';
 
 function RunTracker({ quest }) {
@@ -30,7 +30,7 @@ function RunTracker({ quest }) {
             dispatch({ type: 'TOGGLE_RUN_TIMER' });
         }
     };
-    
+
     const handleReset = () => {
         dispatch({ type: 'RESET_RUN' });
     };
@@ -40,23 +40,23 @@ function RunTracker({ quest }) {
     };
 
     return (
-        <div className={`p-4 border-l-4 transition-colors duration-300 ${completed ? 'quest-item-completed' : 'border-blue-500'}`}>
+        <div className={`p-4 border-l-4 transition-colors duration-300 ${completed ? 'quest-item-completed' : 'border-[var(--color-primary)]'}`}>
             <div className="flex justify-between items-center">
-                <h3 className={`text-xl ${completed ? 'glow-text-complete' : 'text-gray-100'}`}>{name}</h3>
-                <p className={`text-lg ${completed ? 'glow-text-complete' : 'text-blue-400'}`}>{target} km</p>
+                <h3 className={`text-xl ${completed ? 'glow-text-complete' : 'text-[var(--color-text)]'}`}>{name}</h3>
+                <p className={`text-lg ${completed ? 'glow-text-complete' : 'text-[var(--color-primary)]'}`}>{target} km</p>
             </div>
             <div className="text-4xl text-center my-4 glow-text">{formatTime(time)}</div>
-            <div className="flex items-center justify-center space-x-4 mt-2">
-                 <button onClick={handleToggle} className="btn-primary w-24" disabled={completed}>
+            <div className="flex flex-wrap items-center justify-center gap-3 mt-2">
+                <button onClick={handleToggle} className="btn-primary min-w-[80px]" disabled={completed}>
                     {isActive ? 'Stop' : 'Start'}
                 </button>
                 {!isActive && !completed && time > 0 && (
-                    <button onClick={handleComplete} className="btn-action flex items-center space-x-2" aria-label="Complete run quest">
+                    <button onClick={handleComplete} className="btn-action flex items-center gap-2 min-w-[80px]" aria-label="Complete run quest">
                         <CheckCircle2 size={20} />
                         <span>Complete</span>
                     </button>
                 )}
-                <button onClick={handleReset} className="btn-action p-2" aria-label="Reset timer">
+                <button onClick={handleReset} className="btn-action p-2 min-w-[48px]" aria-label="Reset timer">
                     <RotateCcw size={20} />
                 </button>
             </div>

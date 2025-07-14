@@ -1,4 +1,3 @@
-import React from 'react';
 import { X } from 'lucide-react';
 
 function Modal({ isOpen, onClose, title, children }) {
@@ -8,9 +7,9 @@ function Modal({ isOpen, onClose, title, children }) {
         <div className="modal-overlay" onClick={onClose}>
             <div className="system-window modal-content w-full max-w-lg m-4" onClick={e => e.stopPropagation()}>
                 <div className="p-6">
-                    <div className="flex justify-between items-center mb-4">
+                    <div className="flex flex-row justify-between items-center mb-4 gap-2">
                         <h2 className="text-2xl glow-text">{title}</h2>
-                        <button onClick={onClose} className="text-gray-400 hover:text-white">
+                        <button onClick={onClose} className="text-gray-400 hover:text-white flex items-center justify-center rounded-full p-1 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]">
                             <X size={24} />
                         </button>
                     </div>
